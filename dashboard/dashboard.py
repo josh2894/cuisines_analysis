@@ -7,7 +7,7 @@ import os
 from analysis import cuisine_top_ingredients, ingredient_top_cuisines, cuisine_uniqueness
 
 
-df = pd.read_csv(os.getenv('cuisines_analysis_final_csv'))
+# df = pd.read_csv(os.getenv('cuisines_analysis_final_csv'))
 app = Dash(__name__, external_stylesheets=[dbc.themes.LUMEN])
 
 app.layout = dbc.Container([
@@ -15,7 +15,7 @@ app.layout = dbc.Container([
         dbc.Col(
             html.Div(
                 html.H1('Ingredients & Cuisines Dashboard'),
-                style={'text-align': 'center'} 
+                className='title'
             )
         )
     ]      
