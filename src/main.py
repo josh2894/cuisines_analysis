@@ -16,10 +16,8 @@ def main():
         
     processed_data_dir = os.getenv('processed_data_dir')
     destination_path_csv = os.path.join(processed_data_dir, 'cuisines_analysis_final.csv')
-    destination_path_parquet = os.path.join(processed_data_dir, 'cuisines_analysis_final.parquet')
 
     df_final.to_csv(destination_path_csv, index=False)
-    df_final.to_parquet(destination_path_parquet, index=False, compression='brotli')
 
     
 if __name__ == '__main__':
