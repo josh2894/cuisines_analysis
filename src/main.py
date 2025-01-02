@@ -15,8 +15,12 @@ def main():
     df_final = concat_pieces(split_df_list, cuisines)
         
     processed_data_dir = os.getenv('processed_data_dir')
-    destination_path = os.path.join(processed_data_dir, 'cuisines_analysis_final.csv')
-    df_final.to_csv(destination_path, index=False)
+    destination_path_csv = os.path.join(processed_data_dir, 'cuisines_analysis_final.csv')
+    destination_path_parquet = os.path.join(processed_data_dir, 'cuisines_analysis_final.parquet')
+
+    df_final.to_csv(destination_path_csv, index=False)
+    df_final.to_parquet(destination_path_parquet, index=False, compression='brotli')
+
     
 if __name__ == '__main__':
     main()    
