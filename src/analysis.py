@@ -101,13 +101,13 @@ def ingredient_top_cuisines(df: pd.DataFrame, ingredient_list: list) -> plotly.g
 
 def cuisine_uniqueness(df: pd.DataFrame, cuisine: str, usage_filter: int) -> plotly.graph_objects.Figure:
     df_cuisine = df[df['cuisine'] == cuisine]
-    df_cuisine_filtered = ingredient_usage_filter(df_cuisine, 20) # Gets all the ingredients that are used usage_filter or more times in the chosen cuisine
+    df_cuisine_filtered = ingredient_usage_filter(df_cuisine, usage_filter) # Gets all the ingredients that are used usage_filter or more times in the chosen cuisine
     
     filtered_ingredients_cols = list(df_cuisine_filtered.columns)
     df_filtered = df[filtered_ingredients_cols] # Original dataset, filtered to only have the ingredients in filtered_ingredient_cols
     df_grouped = df_filtered.groupby('cuisine')[filtered_ingredients_cols[1:]].sum() # Shows how many times each cuisine used each of the ingredients
     df_grouped.drop(cuisine, axis=0, inplace=True) # Drop the chosen cuisine because we are looking for other cuisines only
-    df_grouped = df_grouped >= 20 # Converts every value to True if the cuisine used the ingredient usage_filter times, False otherwise
+    df_grouped = df_grouped >= usage_filter # Converts every value to True if the cuisine used the ingredient usage_filter times, False otherwise
  
     ingredients_distinct_cuisines = df_grouped.sum() # pd.Series, for each ingredient shows how many other cuisines ingredient was used usage_filter or more times 
 
